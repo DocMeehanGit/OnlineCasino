@@ -5,17 +5,20 @@ from person import Player
 
 
 def get_positive_int(message):
-    posint = 0
-    #cont = True
     while True:
         try:
+            #if this integer parse fails it will be a Value Error and sent to except ValueError
             posint = int(input(message))
+            # if what the user enters is less then zaro it will trigger raise Exception and be sent to except Exception
             if posint < 0:
-                raise Exception()
+                 raise Exception()
             else:
                 break
+        except ValueError:
+            print("Please enter a integer not a string or double")
+        
         except Exception: 
-            print("Please enter a valid integer")
+            print("Please enter a positive integer")
             continue
     return posint
 
@@ -64,6 +67,7 @@ if __name__=="__main__":
     player1 = Player(username, balance)
     
     while True:
+
         gameselect = get_positive_int("Select which game you would like to play!\n 1: Dice\n 2: Blackjack\n 7: Exit\n")
         
         
@@ -71,12 +75,14 @@ if __name__=="__main__":
             dice_game(player1)
         
     
-        if(gameselect == 2):
+        elif(gameselect == 2):
             intro_message_blackjack()
 
-        if(gameselect == 7):
+        elif(gameselect == 7):
             break
-    
-    
+        
+        else:
+            print("Selected number not found, Please try again")    
+            continue    
 
     
